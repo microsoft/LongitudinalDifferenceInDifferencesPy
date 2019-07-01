@@ -1,0 +1,15 @@
+{
+    "identifierColName" : "identifier",
+    "firstTimestampColName" : "timestamp",
+    "kpiColName" : "My KPI",
+    "kpiFileName" : "Example_Kpis.csv",
+    "kpiTimestampColName" : "DateId_UTC",
+    "treatmentFileName" : "Example_Start_Dates.csv",
+    "filters" : {
+        "RoleType":"IC"
+    },
+    "kpiAxisLabel" : "My KPI (hours)",
+    "differenceInDifferencesPlotTitle" : "My KPI Difference In Differences",
+    "parallelLinesPlotTitle" : "My KPI - Check Parallel Lines Assumption",
+    "kpiScalingFactor" : 2.7777777777777776e-07
+}
