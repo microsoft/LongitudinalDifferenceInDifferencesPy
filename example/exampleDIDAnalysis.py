@@ -1,8 +1,8 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-from dailyTimeSeriesDataManager import DailyTimeSeriesDataManager
-from didDesigner import DiDDesigner
+from LongitudinalDifferenceInDifferencesPy.dailyTimeSeriesDataManager import DailyTimeSeriesDataManager
+from LongitudinalDifferenceInDifferencesPy.didDesigner import DiDDesigner
 import json
 
 if __name__ == "__main__":
@@ -55,6 +55,6 @@ if __name__ == "__main__":
 
     df = obj.dataFrame
     df["kpi"] = df["kpi"] * kpiScalingFactor
-    obj.visualizeDifferenceInDifferences(df, kpiAxisLabel, differenceInDifferencesPlotTitle)
     obj.visualizeParallelLinesAssumption(df, kpiAxisLabel, parallelLinesPlotTitle)
+    obj.visualizeDifferenceInDifferences(df, kpiAxisLabel, differenceInDifferencesPlotTitle)
     obj.estimateSummmary(df)

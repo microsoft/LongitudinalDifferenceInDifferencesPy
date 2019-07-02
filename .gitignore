@@ -1,5 +1,7 @@
 __pycache__/*
 .vscode/*
+*.egg-info/
+dist/
 
 wavekpis.csv
 WAVE_Start_Date_Analysis.csv
