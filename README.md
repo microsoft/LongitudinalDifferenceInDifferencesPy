@@ -2,6 +2,8 @@
 # Introduction 
 It's critical to know if the work we are doing is really moving the needle. The problem is that there are potentially many other effects at play which is causing your needle to move or inflate. One analysis method for doing this is called a difference in differences analysis. The question is -- if I had done nothing, then what would have happened to my KPI after people started using my product. If you're looking to measure impact on some quantitative KPIs and you don't have the infrastructure for experiments/"randomized control trials"/"AB Testing", then this type of analysis is for you.
 
+Thanks to Sol Sadeghi, on the Cosine Data Science team, for informing me about this analysis technique and helping with the initial code review!
+
 # Demo
 
 To see a full demonstration of the tool with some example data, 
