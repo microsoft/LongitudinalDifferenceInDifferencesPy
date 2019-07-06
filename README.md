@@ -3,7 +3,7 @@
 # Introduction 
 It's critical to know if the work we are doing is helping the team reach its organizational goals. The problem is that there are potentially many other effects at play. One analysis method for doing this is called a difference in differences analysis. If I had done nothing, then what would have happened to the numbers I care about or "key performance indicators" (KPI) after people started using my product.
 
-It's not always feasible (e.g. due to cost) or ethical to run a fully randomized experiment when building a product. If you're looking to measure impact on some quantitative KPIs and you don't have the infrastructure for experiments/"randomized control trials"/"AB Testing", then this type of analysis is for you.
+It's not always feasible (e.g. due to cost or lack of necessary infrastructure) or ethical (e.g. randomly assigning a cancer-causing drug to a subgroup of the population sample) to run a fully randomized experiment when building a product. If you're looking to measure impact on some quantitative KPIs and you can't run experiments/"randomized control trials"/"AB Testing", then this type of analysis is for you.
 
 Thanks to Sol Sadeghi (Cosine Data Science team @ Microsoft) for informing me about this analysis technique and helping with the initial code review!
 
