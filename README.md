@@ -6,6 +6,14 @@ It's not always feasible (e.g. due to cost) or ethical to run a fully randomized
 
 Thanks to Sol Sadeghi (Cosine Data Science team @ Microsoft) for informing me about this analysis technique and helping with the initial code review!
 
+# Case Study
+
+Example of how this tool was used inside of Microsoft to show the (5+%) impact of a product on developer productivity within the Windows dision coming soon.
+
+# Getting Started
+[Our documentation is available on this repository's wiki.](https://github.com/microsoft/LongitudinalDifferenceInDifferencesPy/wiki)
+
+
 # Demo
 
 To see a full demonstration of the tool with some example data, 
@@ -15,12 +23,6 @@ To see a full demonstration of the tool with some example data,
 python exampleDIDAnalysis.py
 ```
 
-# Case Study
-
-Example of how this tool was used inside of Microsoft to show the (5+%) impact of a product on developer productivity within the Windows dision coming soon.
-
-# Getting Started
-[Our documentation is available on this repository's wiki.](https://github.com/microsoft/LongitudinalDifferenceInDifferencesPy/wiki)
 
 
 # Contributing
