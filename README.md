@@ -1,3 +1,4 @@
+<a href="https://www.youtube.com/watch?v=J7q2H8aB8bQ"><img src="https://github.com/microsoft/LongitudinalDifferenceInDifferencesPy/blob/master/Images/youtubeScreenshot.PNG" /></a>
 
 # Introduction 
 It's critical to know if the work we are doing is helping the team reach its organizational goals. The problem is that there are potentially many other effects at play. One analysis method for doing this is called a difference in differences analysis. If I had done nothing, then what would have happened to the numbers I care about or "key performance indicators" (KPI) after people started using my product.
