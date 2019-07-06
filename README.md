@@ -9,7 +9,7 @@ Thanks to Sol Sadeghi (Cosine Data Science team @ Microsoft) for informing me ab
 
 # Case Study
 
-Example of how this tool was used inside of Microsoft to show the (5+%) impact of a product on developer productivity within the Windows dision coming soon.
+Example of how this tool was used inside of Microsoft to show the (5+%) impact of a product on internal/"1st party" developer productivity within the Windows division at Microsoft coming soon.
 
 # Getting Started
 [Our documentation is available on this repository's wiki.](https://github.com/microsoft/LongitudinalDifferenceInDifferencesPy/wiki)
