@@ -135,10 +135,6 @@ class DailyTimeSeriesDataManager():
         return d
 
     def Read(self, kpiFileName, treatmentFileName, identiferColName, kpiColName, firstTimestampColName, kpiTimeStampColName, filters):
-        '''
-        Returns: a tuple of (arguments for DiffInDiffProcessedDataFrameUnrolledState, dictionary mapping identifiers to their adjusted normalized units after the min point in study)
-        Creates: mapping from identifier to minTimePointByEmployee
-        '''
         KPI_DF = pd.read_csv(kpiFileName)
         
         self.KPI_DF = KPI_DF
