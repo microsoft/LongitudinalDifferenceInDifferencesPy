@@ -254,6 +254,35 @@ class DiDDesigner():
         plt.grid(True)
         plt.show()
 
+    def printTreatmentMatrixPoints(self, df):
+        '''
+        Prints out KPIs of pre-treatment and post-treatment of the comparison and treated groups.
+        '''
+        treatmentMatrix = self._calculate_aggregate_treatment_matrix(df, aggregate=np.mean)
+        kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = \
+            treatmentMatrix
+        print('pre-treatment mean KPI of comparison group: ' + kpiTreat0Post0_mean + \
+            '\npost-treatment mean KPI of comparison group: ' + kpiTreat0Post1_mean + \
+            '\npre-treatment mean KPI of treated group: ' + kpiTreat1Post0_mean + \
+            '\npost-treatment mean KPI of treated group: ' + kpikpiTreat1Post1_mean)
+
+    def calculatePercentImprovement(self, df):
+        '''
+        Calculates and prints out the percent improvement of the treated group in comparison to comparison group.
+        '''
+        treatmentMatrix = self._calculate_aggregate_treatment_matrix(df, aggregate=np.mean)
+        kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = treatmentMatrix
+        inital = kpiTreat1Post0_mean + (kpiTreat0Post1_mean - kpiTreat0Post0_mean)
+        percentImprovement = ((kpiTreat1Post1_mean - initial) / initial) * 100
+        return percentImprovement
+
+    def printPercentImprovement(self, df):
+        '''
+        Prints percent improvent of the treated group in comparison to comparison group.
+        '''
+        percentImprovement = calculatePercentImprovement(self, df)
+        print('percent improvement: ' + str(percentImprovement) + '%')
+
 if __name__ == "__main__":
     SEED_VALUE = 1
     np.random.seed(SEED_VALUE)
@@ -345,3 +374,17 @@ if __name__ == "__main__":
     s_p = np.sqrt(((n - 1) * s_x ** 2 + (m - 1) * s_y ** 2) / (n + m - 2.0))
     t = ((x_bar - y_bar) - 0) / (s_p * np.sqrt(1 / n + 1 / m))
     assert(t==obj.AreaUnderCurveEstimate(df)["test statistic"])
+
+    #---------------------------------------------------------------------------------------
+    #Test 4 - Percent Improvement
+    #---------------------------------------------------------------------------------------
+    kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = 10, 12, 10, 20
+    print('pre-treatment mean KPI of comparison group: ' + str(kpiTreat0Post0_mean) + \
+        '\npost-treatment mean KPI of comparison group: ' + str(kpiTreat0Post1_mean) + \
+        '\npre-treatment mean KPI of treated group: ' + str(kpiTreat1Post0_mean) + \
+            '\npost-treatment mean KPI of treated group: ' + str(kpiTreat1Post1_mean))
+    percentImprovement = ((kpiTreat1Post1_mean - (kpiTreat1Post0_mean + \
+        (kpiTreat0Post1_mean - kpiTreat0Post0_mean))) / (kpiTreat1Post0_mean + \
+            (kpiTreat0Post1_mean - kpiTreat0Post0_mean)))*100
+    print('percent improvement: ' + str(percentImprovement) + '%')
+    assert(percentImprovement == ((2 / 3) * 100))
