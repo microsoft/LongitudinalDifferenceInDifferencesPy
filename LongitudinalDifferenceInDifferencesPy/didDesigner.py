@@ -176,6 +176,10 @@ class DiDDesigner():
         print("Area under the Curve Estimate:")
         print(self.AreaUnderCurveEstimate(df))
 
+        print("")
+        print("Percentage Improvements:")
+        print(self.printPercentImprovement(df))
+
     @property
     def minTimePointForIdentifierDict(self):
         if self.timeSeriesDataManager == None:
@@ -261,10 +265,12 @@ class DiDDesigner():
         treatmentMatrix = self._calculate_aggregate_treatment_matrix(df, aggregate=np.mean)
         kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = \
             treatmentMatrix
-        print('pre-treatment mean KPI of comparison group: ' + kpiTreat0Post0_mean + \
-            '\npost-treatment mean KPI of comparison group: ' + kpiTreat0Post1_mean + \
-            '\npre-treatment mean KPI of treated group: ' + kpiTreat1Post0_mean + \
-            '\npost-treatment mean KPI of treated group: ' + kpikpiTreat1Post1_mean)
+
+        print('{ Pre-treatment mean KPI of comparison group: ' + str(kpiTreat0Post0_mean) + \
+            ', Post-treatment mean KPI of comparison group: ' + str(kpiTreat0Post1_mean) + \
+            '}\n{ Pre-treatment mean KPI of treated group: ' + str(kpiTreat1Post0_mean) + \
+            ', Post-treatment mean KPI of treated group: ' + str(kpiTreat1Post1_mean) + \
+                '}')
 
     def calculatePercentImprovement(self, df):
         '''
@@ -272,7 +278,7 @@ class DiDDesigner():
         '''
         treatmentMatrix = self._calculate_aggregate_treatment_matrix(df, aggregate=np.mean)
         kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = treatmentMatrix
-        inital = kpiTreat1Post0_mean + (kpiTreat0Post1_mean - kpiTreat0Post0_mean)
+        initial = kpiTreat1Post0_mean + (kpiTreat0Post1_mean - kpiTreat0Post0_mean)
         percentImprovement = ((kpiTreat1Post1_mean - initial) / initial) * 100
         return percentImprovement
 
@@ -280,8 +286,9 @@ class DiDDesigner():
         '''
         Prints percent improvent of the treated group in comparison to comparison group.
         '''
-        percentImprovement = calculatePercentImprovement(self, df)
-        print('percent improvement: ' + str(percentImprovement) + '%')
+        percentImprovement = self.calculatePercentImprovement(df)
+        self.printTreatmentMatrixPoints(df)
+        print('Percent improvement: ' + str(percentImprovement) + '%')
 
 if __name__ == "__main__":
     SEED_VALUE = 1
@@ -378,13 +385,11 @@ if __name__ == "__main__":
     #---------------------------------------------------------------------------------------
     #Test 4 - Percent Improvement
     #---------------------------------------------------------------------------------------
-    kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = 10, 12, 10, 20
-    print('pre-treatment mean KPI of comparison group: ' + str(kpiTreat0Post0_mean) + \
-        '\npost-treatment mean KPI of comparison group: ' + str(kpiTreat0Post1_mean) + \
-        '\npre-treatment mean KPI of treated group: ' + str(kpiTreat1Post0_mean) + \
-            '\npost-treatment mean KPI of treated group: ' + str(kpiTreat1Post1_mean))
+    
+    #this needs to be updated to call the function
+    kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = 4.0, 9.0, 3.0, 13.0
     percentImprovement = ((kpiTreat1Post1_mean - (kpiTreat1Post0_mean + \
         (kpiTreat0Post1_mean - kpiTreat0Post0_mean))) / (kpiTreat1Post0_mean + \
             (kpiTreat0Post1_mean - kpiTreat0Post0_mean)))*100
-    print('percent improvement: ' + str(percentImprovement) + '%')
-    assert(percentImprovement == ((2 / 3) * 100))
+    assert(percentImprovement==obj.calculatePercentImprovement(df))
+    
