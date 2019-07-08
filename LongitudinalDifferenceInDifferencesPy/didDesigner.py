@@ -379,7 +379,12 @@ if __name__ == "__main__":
     #Test 4 - Percent Improvement
     #---------------------------------------------------------------------------------------
     kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = 10, 12, 10, 20
-    print('pre-treatment mean KPI of comparison group: ' + str(kpiTreat0Post0_mean) + '\npost-treatment mean KPI of comparison group: ' + str(kpiTreat0Post1_mean) + '\npre-treatment mean KPI of treated group: ' + str(kpiTreat1Post0_mean) + '\npost-treatment mean KPI of treated group: ' + str(kpiTreat1Post1_mean))
-    percentImprovement = ((kpiTreat1Post1_mean - (kpiTreat1Post0_mean + (kpiTreat0Post1_mean - kpiTreat0Post0_mean))) / (kpiTreat1Post0_mean + (kpiTreat0Post1_mean - kpiTreat0Post0_mean)))*100
+    print('pre-treatment mean KPI of comparison group: ' + str(kpiTreat0Post0_mean) + \
+        '\npost-treatment mean KPI of comparison group: ' + str(kpiTreat0Post1_mean) + \
+        '\npre-treatment mean KPI of treated group: ' + str(kpiTreat1Post0_mean) + \
+            '\npost-treatment mean KPI of treated group: ' + str(kpiTreat1Post1_mean))
+    percentImprovement = ((kpiTreat1Post1_mean - (kpiTreat1Post0_mean + \
+        (kpiTreat0Post1_mean - kpiTreat0Post0_mean))) / (kpiTreat1Post0_mean + \
+            (kpiTreat0Post1_mean - kpiTreat0Post0_mean)))*100
     print('percent improvement: ' + str(percentImprovement) + '%')
     assert(percentImprovement == ((2 / 3) * 100))
