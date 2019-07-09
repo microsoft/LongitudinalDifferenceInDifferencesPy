@@ -168,13 +168,18 @@ class DiDDesigner():
         print("Difference in Differences Estimate:")
         print(self.calculateDifferenceInDifferences(df))
 
-        print("")
-        print("Treatment T-test:")
+        print("\nTreatment T-test:")
         print(self.postPreTTest(df))
 
-        print("")
-        print("Area under the Curve Estimate:")
+        print("\nArea under the Curve Estimate:")
         print(self.AreaUnderCurveEstimate(df))
+
+
+        print("\nTreatment Matrix:")
+        self.printTreatmentMatrixPoints(df)
+
+        print("\nPercentage Improvements:")
+        print(self.printPercentImprovement(df))
 
     @property
     def minTimePointForIdentifierDict(self):
@@ -261,10 +266,12 @@ class DiDDesigner():
         treatmentMatrix = self._calculate_aggregate_treatment_matrix(df, aggregate=np.mean)
         kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = \
             treatmentMatrix
-        print('pre-treatment mean KPI of comparison group: ' + kpiTreat0Post0_mean + \
-            '\npost-treatment mean KPI of comparison group: ' + kpiTreat0Post1_mean + \
-            '\npre-treatment mean KPI of treated group: ' + kpiTreat1Post0_mean + \
-            '\npost-treatment mean KPI of treated group: ' + kpikpiTreat1Post1_mean)
+
+        print('{ Pre-treatment mean KPI of comparison group: ' + str(kpiTreat0Post0_mean) + \
+            ', Post-treatment mean KPI of comparison group: ' + str(kpiTreat0Post1_mean) + \
+            '}\n{ Pre-treatment mean KPI of treated group: ' + str(kpiTreat1Post0_mean) + \
+            ', Post-treatment mean KPI of treated group: ' + str(kpiTreat1Post1_mean) + \
+                '}')
 
     def calculatePercentImprovement(self, df):
         '''
@@ -272,7 +279,7 @@ class DiDDesigner():
         '''
         treatmentMatrix = self._calculate_aggregate_treatment_matrix(df, aggregate=np.mean)
         kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = treatmentMatrix
-        inital = kpiTreat1Post0_mean + (kpiTreat0Post1_mean - kpiTreat0Post0_mean)
+        initial = kpiTreat1Post0_mean + (kpiTreat0Post1_mean - kpiTreat0Post0_mean)
         percentImprovement = ((kpiTreat1Post1_mean - initial) / initial) * 100
         return percentImprovement
 
@@ -280,8 +287,8 @@ class DiDDesigner():
         '''
         Prints percent improvent of the treated group in comparison to comparison group.
         '''
-        percentImprovement = calculatePercentImprovement(self, df)
-        print('percent improvement: ' + str(percentImprovement) + '%')
+        percentImprovement = self.calculatePercentImprovement(df)
+        print('Percent improvement: ' + str(percentImprovement) + '%')
 
 if __name__ == "__main__":
     SEED_VALUE = 1
@@ -338,7 +345,7 @@ if __name__ == "__main__":
     estimatedEffect = didOutput["estimate"]
     confidenceInterval = didOutput["confidence interval"]
     trueEffect = 5.0 # 10-5
-    assert(trueEffect==((meanKPIs[2]-meanKPIs[0])-(meanKPIs[3]-meanKPIs[1])))
+    assert(trueEffect == ((meanKPIs[2]-meanKPIs[0])-(meanKPIs[3]-meanKPIs[1])))
     assert(np.isclose(estimatedEffect,trueEffect))
     ci = confidenceInterval
     assert(trueEffect > ci[0] and trueEffect < ci[1])
@@ -358,7 +365,7 @@ if __name__ == "__main__":
     s_y   = np.std(y,ddof=1)
     s_p = np.sqrt(((n - 1) * s_x ** 2 + (m - 1) * s_y ** 2) / (n + m - 2.0))
     t = ((x_bar - y_bar) - 0) / (s_p * np.sqrt(1 / n + 1 / m))
-    assert(t==obj.postPreTTest(df)["test statistic"])
+    assert(t == obj.postPreTTest(df)["test statistic"])
 
     #---------------------------------------------------------------------------------------
     #Test 3 - Area Under the Curve Estimation
@@ -373,18 +380,15 @@ if __name__ == "__main__":
     s_y   = np.std(y,ddof=1)
     s_p = np.sqrt(((n - 1) * s_x ** 2 + (m - 1) * s_y ** 2) / (n + m - 2.0))
     t = ((x_bar - y_bar) - 0) / (s_p * np.sqrt(1 / n + 1 / m))
-    assert(t==obj.AreaUnderCurveEstimate(df)["test statistic"])
+    assert(t == obj.AreaUnderCurveEstimate(df)["test statistic"])
 
     #---------------------------------------------------------------------------------------
     #Test 4 - Percent Improvement
     #---------------------------------------------------------------------------------------
-    kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = 10, 12, 10, 20
-    print('pre-treatment mean KPI of comparison group: ' + str(kpiTreat0Post0_mean) + \
-        '\npost-treatment mean KPI of comparison group: ' + str(kpiTreat0Post1_mean) + \
-        '\npre-treatment mean KPI of treated group: ' + str(kpiTreat1Post0_mean) + \
-            '\npost-treatment mean KPI of treated group: ' + str(kpiTreat1Post1_mean))
-    percentImprovement = ((kpiTreat1Post1_mean - (kpiTreat1Post0_mean + \
-        (kpiTreat0Post1_mean - kpiTreat0Post0_mean))) / (kpiTreat1Post0_mean + \
-            (kpiTreat0Post1_mean - kpiTreat0Post0_mean)))*100
-    print('percent improvement: ' + str(percentImprovement) + '%')
-    assert(percentImprovement == ((2 / 3) * 100))
+    
+    # Note: this test is dependent on the following variables to be these specific values in the data frame
+    # Variables: kpiTreat0Post0_mean, kpiTreat0Post1_mean, kpiTreat1Post0_mean, kpiTreat1Post1_mean = 4.0, 9.0, 3.0, 13.0
+    # Description: this value was found by finding the difference in the treatment group without a treatment compared to the 
+    #               treatment group with the treatment.
+    assert((5/8)*100 == obj.calculatePercentImprovement(df))
+    
