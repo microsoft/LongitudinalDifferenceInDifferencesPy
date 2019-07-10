@@ -174,12 +174,11 @@ class DiDDesigner():
         print("\nArea under the Curve Estimate:")
         print(self.AreaUnderCurveEstimate(df))
 
-
         print("\nTreatment Matrix:")
         self.printTreatmentMatrixPoints(df)
 
         print("\nPercentage Improvements:")
-        print(self.printPercentImprovement(df))
+        self.printPercentImprovement(df)
 
     @property
     def minTimePointForIdentifierDict(self):

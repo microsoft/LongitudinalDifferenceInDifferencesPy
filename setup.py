@@ -8,7 +8,7 @@ def contentsOfReadMe():
 
 setup(
     name='LongitudinalDifferenceInDifferencesPy',
-    version='1.0.1',
+    version='1.0.2',
     packages=["LongitudinalDifferenceInDifferencesPy"],
     description='Runs a difference in differences analysis in Python.',
     long_description=contentsOfReadMe(),
