@@ -9,6 +9,8 @@ Thanks to Sol Sadeghi (Cosine Data Science team @ Microsoft) for informing me ab
 
 # Case Study
 
+This package is designed for studying the causal effect of WAVE using code authoring time – result of a research study done by MSR and Windows ES, on developers’ productivity. This led the WAVE team deciding on automatically installing their product to all relevant COSINE developers.
+
 Example of how this tool was used inside of Microsoft to show the (5+%) impact of a product on internal/"1st party" developer productivity within the Windows division at Microsoft coming soon.
 
 # Getting Started
